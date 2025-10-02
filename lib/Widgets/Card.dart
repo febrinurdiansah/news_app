@@ -16,13 +16,15 @@ void _launchURL(String url) async {
     }
   }
 
+//Not used(maybe)
 class LatestNewsScroll extends StatefulWidget {
+  late final MainSource source;
+
   @override
   State<LatestNewsScroll> createState() => _LatestNewsScrollState();
 }
-
 class _LatestNewsScrollState extends State<LatestNewsScroll> {
-  late Future<List<NewDataNews>> futureData;
+  late Future<List<NewsItem>> futureData;
 
   @override
   void initState() {
@@ -30,15 +32,15 @@ class _LatestNewsScrollState extends State<LatestNewsScroll> {
     futureData = fetchData();
   }
 
-  Future<List<NewDataNews>> fetchData() async {
+  Future<List<NewsItem>> fetchData() async {
     final response =
-        await http.get(Uri.parse('https://node-api-mu-ochre.vercel.app/terbaru'));
+        await http.get(Uri.parse('${widget.source}/berita'));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
       List<dynamic> mergerApi = jsonResponse['merger_api'];
       return mergerApi
-          .map((data) => NewDataNews.fromJson(data))
+          .map((data) => NewsItem.fromJson(data))
           .toList();
     } else {
       throw Exception('Failed to load API');
@@ -49,7 +51,7 @@ class _LatestNewsScrollState extends State<LatestNewsScroll> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: futureData,
-      builder: (context, AsyncSnapshot<List<NewDataNews>> snapshot) {
+      builder: (context, AsyncSnapshot<List<NewsItem>> snapshot) {
         if (snapshot.hasData) {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -164,12 +166,13 @@ class _LatestNewsScrollState extends State<LatestNewsScroll> {
   }
 }
 
+//Not used(maybe)
 class PubliserWidget extends StatefulWidget {
+  late final MainSource source;
 
   @override
   State<PubliserWidget> createState() => _PubliserWidgetState();
 }
-
 class _PubliserWidgetState extends State<PubliserWidget> {
   late Future<List<PubliserData>> futureData;
 
@@ -181,7 +184,7 @@ class _PubliserWidgetState extends State<PubliserWidget> {
 
   Future<List<PubliserData>> fetchData() async {
     final response =
-      await http.get(Uri.parse('https://node-api-mu-ochre.vercel.app/publiser'));
+      await http.get(Uri.parse('${widget.source}/publiser'));
 
     if (response.statusCode == 200 ){
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
@@ -197,7 +200,7 @@ class _PubliserWidgetState extends State<PubliserWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: futureData, 
+      future: futureData,
       builder: (context, AsyncSnapshot<List<PubliserData>> snapshot) {
         if (snapshot.hasData) {
           return Container(
@@ -211,7 +214,7 @@ class _PubliserWidgetState extends State<PubliserWidget> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => 
+                      builder: (context) =>
                             PubliserScreen(
                               source: item.id,
                               namePub: item.name,
@@ -257,13 +260,13 @@ class _PubliserWidgetState extends State<PubliserWidget> {
   }
 }
 
+//Not used (maybe)
 class ExploreNewsScroll extends StatefulWidget {
   @override
   State<ExploreNewsScroll> createState() => _ExploreNewsScrollState();
 }
-
 class _ExploreNewsScrollState extends State<ExploreNewsScroll> {
-  late Future<List<NewDataNews>> futureData;
+  late Future<List<NewsItem>> futureData;
 
   @override
   void initState() {
@@ -271,7 +274,7 @@ class _ExploreNewsScrollState extends State<ExploreNewsScroll> {
     futureData = fetchData();
   }
 
-  Future<List<NewDataNews>> fetchData() async {
+  Future<List<NewsItem>> fetchData() async {
     final response =
         await http.get(Uri.parse('https://node-api-mu-ochre.vercel.app/explore'));
 
@@ -279,7 +282,7 @@ class _ExploreNewsScrollState extends State<ExploreNewsScroll> {
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
       List<dynamic> mergerApi = jsonResponse['merger_api'];
       return mergerApi
-          .map((data) => NewDataNews.fromJson(data))
+          .map((data) => NewsItem.fromJson(data))
           .toList();
     } else {
       throw Exception('Failed to load API');
@@ -290,7 +293,7 @@ class _ExploreNewsScrollState extends State<ExploreNewsScroll> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: futureData,
-      builder: (context, AsyncSnapshot<List<NewDataNews>> snapshot) {
+      builder: (context, AsyncSnapshot<List<NewsItem>> snapshot) {
         if (snapshot.hasData) {
           return SliverList(
             delegate: SliverChildBuilderDelegate(

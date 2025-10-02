@@ -12,6 +12,7 @@ class TrendingScreen extends StatefulWidget {
 
 class _TrendingScreenState extends State<TrendingScreen> {
   late Future<List<TrenDataNews>> futureData;
+  late final String source = MainSource().source;
 
   @override
   void initState() {
@@ -20,7 +21,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
   }
 
   Future<List<TrenDataNews>> fetchData() async {
-    final response = await http.get(Uri.parse('https://node-api-mu-ochre.vercel.app/trending'));
+    final response = await http.get(Uri.parse('$source/trending'));
 
     if (response.statusCode == 200) {
       List<dynamic> jsonResponse = jsonDecode(response.body);

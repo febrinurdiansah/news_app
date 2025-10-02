@@ -1,3 +1,9 @@
+//Source Link
+class MainSource{
+  final String source = "http://10.0.2.2:4000";
+}
+
+// Model classes
 class PubliserData {
   final String id;
   final String name;
@@ -12,18 +18,30 @@ class PubliserData {
   });
 
   factory PubliserData.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> jsonCategories = json['category'];
-    final List<String> categories = jsonCategories.map((category) => category.toString()).toList();
+    List<String> categoriesList = [];
+
+    if (json['categories'] != null) {
+      if(json['categories'] is List) {
+        for (var item in json['categories']) {
+          if (item is String) {
+            categoriesList.add(item);
+          } else if (item is Map<String, dynamic>) {
+            categoriesList.add(item['name'] ?? '');
+          }
+        }
+      }
+    }
+
     return PubliserData(
-      id: json['id'],
-      name: json['name'],
-      icImage: json['icon_url'],
-      category: categories,
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      icImage: json['icon_url'] ?? '',
+      category: categoriesList,
     );
   }
 }
 
-class NewDataNews {
+class NewsItem {
   final String id;
   final String title;
   final String image;
@@ -32,7 +50,7 @@ class NewDataNews {
   final String pubTime;
   final String link;
 
-  NewDataNews({
+  NewsItem({
     required this.id,
     required this.title,
     required this.image,
@@ -42,21 +60,21 @@ class NewDataNews {
     required this.link,
   });
 
-  factory NewDataNews.fromJson(Map<String, dynamic> json) {
-    return NewDataNews(
-      id: json['id'] ?? '',
+  factory NewsItem.fromJson(Map<String, dynamic> json) {
+    return NewsItem(
+      id: json['id']?.toString() ?? '',
       title: json['title'] ?? '',
       image: json['image'] ?? '',
       icImage: json['icon_url'] ?? '',
-      source: json['name'] ?? '',
-      pubTime: json['date'] ?? '',
+      source: json['name'] ?? json['source'] ?? '',
+      pubTime: json['date'] ?? json['pubTime'] ?? '',
       link: json['link'] ?? '',
     );
   }
 }
 
 class TrenDataNews {
-  final int id;
+  final String id;
   final String title;
   final String image;
   final String icImage;
@@ -77,17 +95,15 @@ class TrenDataNews {
   });
 
   factory TrenDataNews.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> jsonCategories = json['category'] ?? '';
-    final List<String> categories = jsonCategories.map((category) => category.toString()).toList();
     return TrenDataNews(
       id: json['id'] ?? '',
       title: json['title'] ?? '',
-      image: json['image'] ?? '',
-      icImage: json['icon_url'] ?? '',
+      image: json['thumbnail'] ?? '',
+      icImage: json['sourceIcon'] ?? '',
       source: json['source'] ?? '',
       pubTime: json['date'] ?? '',
-      link: json['link'] ?? '',
-      category: categories,
+      link: json['url'] ?? '',
+      category: [],
     );
   }
 }
@@ -113,50 +129,3 @@ class SearchData {
     );
   }
 }
-
-
-// untuk test 1
-// class SearchData {
-//   final String source;
-//   final String title;
-//   final String date;
-//   final String link;
-//   final String image;
-//   final int timestamp;
-//   final DateTime dateTime; // New field for DateTime
-
-//   SearchData({
-//     required this.source,
-//     required this.title,
-//     required this.date,
-//     required this.link,
-//     required this.image,
-//     required this.timestamp,
-//     required this.dateTime,
-//   });
-
-//   factory SearchData.fromJson(Map<String, dynamic> json) {
-//     return SearchData(
-//       source: json['source'],
-//       title: json['title'],
-//       date: json['date'],
-//       link: json['link'],
-//       image: json['image'],
-//       timestamp: json['timestamp'],
-//       dateTime: DateTime.fromMillisecondsSinceEpoch(json['timestamp']),
-//     );
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'source': source,
-//       'title': title,
-//       'date': date,
-//       'link': link,
-//       'image': image,
-//       'timestamp': timestamp,
-//       'dateTime': dateTime.toIso8601String(), // Convert DateTime to String
-//     };
-//   }
-// }
-
