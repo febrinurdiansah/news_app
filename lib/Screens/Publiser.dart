@@ -419,7 +419,7 @@ class _PublisherNewsByCategoryState extends State<PublisherNewsByCategory> {
                                 ),
                                 SizedBox(height: 12),
 
-                                //Footer
+                                //Footer Section
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
