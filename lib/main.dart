@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/Screens/Discover.dart';
 import 'package:news_app/Screens/Home.dart';
+import 'package:news_app/Screens/LatestNews.dart';
+import 'package:news_app/Screens/Trending.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 void main() {
@@ -38,12 +40,12 @@ class _MyAppState extends State<MyApp> {
           onTap: (i) => setState(() => _currentIndex = i),
           items: [
             SalomonBottomBarItem(
-              icon: Icon(Icons.home), 
+              icon: Icon(Icons.home),
               title: Text("Home"),
               selectedColor: Colors.grey
               ),
             SalomonBottomBarItem(
-              icon: Icon(Icons.explore), 
+              icon: Icon(Icons.explore),
               title: Text("Explore"),
               selectedColor: Colors.grey
               ),
