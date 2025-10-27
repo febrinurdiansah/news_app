@@ -24,6 +24,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   Future<List<SearchData>>? _searchResultsFuture;
   String _selectedTime = 'Waktu';
   String _selectedSource = 'Sumber';
+  late final String source = MainSource().source;
 
   final List<String> _timeFilters = ['Waktu', 'Hari Ini', 'Kemarin', '2 Hari Terakhir', '7 Hari Terakhir'];
   final List<String> _sources = ['Sumber', 'Antara', 'CNN', 'CNBC', 'Kumparan', 'Okezone', 'Republika', 'Tempo', 'Tribun']; 
@@ -260,7 +261,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
   // Fetch data function
   Future<List<SearchData>> fetchData(String query) async {
-    final response = await http.get(Uri.parse('https://node-api-mu-ochre.vercel.app/search?keyword=$query'));
+    final response = await http.get(Uri.parse('$source/search?keyword=$query'));
 
     if (response.statusCode == 200) {
       List<dynamic> jsonResponse = jsonDecode(response.body);
