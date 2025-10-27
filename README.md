@@ -1,16 +1,53 @@
-# news_app
+# 📰 News App
 
-A new Flutter project.
+<p align="center">
+  <img src="assets/thumbnail.png" width="400" />
+</p>
 
-## Getting Started
+**News App** is a Flutter-based mobile application that aggregates news from multiple public APIs into one seamless and modern experience.  
+The app allows users to explore trending topics, categories, and publishers — all in real-time without using a database.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
+- 🗞️ Display latest and trending news from multiple APIs  
+- 🔍 Search functionality with source and time filters  
+- 🏷️ Category-based browsing  
+- 🌐 WebView for reading full articles  
+- 🧩 Publisher detail pages with categorized tabs  
+- ⚡ Fast and responsive UI built with Flutter  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack
+- **Framework:** Flutter (Dart)  
+- **Architecture:** REST API Integration  
+- **Data Source:** Multiple public news APIs  
+- **State Management:** setState / FutureBuilder  
+- **Deployment:** Hosted on Vercel (Backend API Aggregator)
+
+---
+
+## 📖 Description
+
+The **News App** was built as part of a study project to explore how public APIs can be combined into a unified mobile application.  
+The project focuses on creating a responsive UI, efficient data handling, and a clean news browsing experience — helping users stay informed anytime, anywhere.
+
+---
+
+## 🚀 Getting Started
+
+To run this project locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/febrinurdiansah/news_app.git
+
+# Navigate to project directory
+cd news_app
+
+# Get dependencies
+flutter pub get
+
+# Run the app
+flutter run
