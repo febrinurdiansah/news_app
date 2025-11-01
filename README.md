@@ -1,7 +1,7 @@
 # 📰 News App
 
 <p align="center">
-  <img src="assets/thumbnail.png" width="800" />
+  <img src="images/thumbnail.png" width="800" />
 </p>
 
 **News App** is a Flutter-based mobile application that aggregates news from multiple public APIs into one seamless and modern experience.  
